@@ -46,7 +46,7 @@ Run the Web UI for interactive editing and conversion:
 ```powershell
 cd webui
 python app.py
-# Visit http://localhost:5000
+Visit http://localhost:5000
 ```
 
 ## Usage Examples
