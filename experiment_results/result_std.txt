@@ -1,0 +1,159 @@
+PRISM
+=====
+
+Version: 4.9
+Date: Wed Nov 19 06:53:38 UTC 2025
+Hostname: codespaces-1eed51
+Memory limits: cudd=1g, java(heap)=1g
+Command line: prism coap_eap_dtmc.pm prism_props_dtmc.pctl
+
+Parsing PRISM model file "coap_eap_dtmc.pm"...
+
+Type:        DTMC
+Modules:     Protocol
+Variables:   s
+Labels:      "auth_success" "failed" "compromised"
+Rewards:     "bytes" "msgs"
+
+Parsing properties file "prism_props_dtmc.pctl"...
+
+4 properties:
+(1) P=? [ F "auth_success" ]
+(2) P=? [ F "compromised" ]
+(3) R{"bytes"}=? [ F s>=20 ]
+(4) R{"msgs"}=? [ F s>=20 ]
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F "auth_success" ]
+
+Building model (engine:symbolic)...
+
+Computing reachable states...
+
+Reachability (BFS): 16 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.019 seconds.
+
+Type:        DTMC
+States:      18 (1 initial)
+Transitions: 48
+
+Transition matrix: 56 nodes (7 terminal), 48 minterms, vars: 5r/5c
+
+Prob0: 16 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Prob1: 2 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+yes = 1, no = 2, maybe = 15
+
+Computing remaining probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=5, nodes=53] [2.5 KB]
+Adding explicit sparse matrices... [levels=5, num=1, compact] [0.2 KB]
+Creating vector for diagonals... [dist=1, compact] [0.0 KB]
+Creating vector for RHS... [dist=2, compact] [0.1 KB]
+Allocating iteration vectors... [2 x 0.1 KB]
+TOTAL: [3.1 KB]
+
+Starting iterations...
+
+Jacobi: 16 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Value in the initial state: 0.7272705702439323
+
+Time for model checking: 0.005 seconds.
+
+Result: 0.7272705702439323 (exact floating point)
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F "compromised" ]
+
+Prob0: 2 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Prob1: 2 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+yes = 1, no = 2, maybe = 15
+
+Computing remaining probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=5, nodes=53] [2.5 KB]
+Adding explicit sparse matrices... [levels=5, num=1, compact] [0.2 KB]
+Creating vector for diagonals... [dist=1, compact] [0.0 KB]
+Creating vector for RHS... [dist=2, compact] [0.1 KB]
+Allocating iteration vectors... [2 x 0.1 KB]
+TOTAL: [3.1 KB]
+
+Starting iterations...
+
+Jacobi: 16 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Value in the initial state: 0.013057872535679131
+
+Time for model checking: 0.001 seconds.
+
+Result: 0.013057872535679131 (exact floating point)
+
+---------------------------------------------------------------------
+
+Model checking: R{"bytes"}=? [ F s>=20 ]
+
+Prob0: 2 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Prob1: 1 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+goal = 3, inf = 0, maybe = 15
+
+Computing remaining rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=5, nodes=53] [2.5 KB]
+Adding explicit sparse matrices... [levels=5, num=1, compact] [0.2 KB]
+Creating vector for diagonals... [dist=1, compact] [0.0 KB]
+Creating vector for RHS... [dist=8, compact] [0.1 KB]
+Allocating iteration vectors... [2 x 0.1 KB]
+TOTAL: [3.1 KB]
+
+Starting iterations...
+
+Jacobi: 15 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Value in the initial state: 1345.3971453446609
+
+Time for model checking: 0.001 seconds.
+
+Result: 1345.3971453446609 (exact floating point)
+
+---------------------------------------------------------------------
+
+Model checking: R{"msgs"}=? [ F s>=20 ]
+
+Prob0: 2 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Prob1: 1 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+goal = 3, inf = 0, maybe = 15
+
+Computing remaining rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=5, nodes=53] [2.5 KB]
+Adding explicit sparse matrices... [levels=5, num=1, compact] [0.2 KB]
+Creating vector for diagonals... [dist=1, compact] [0.0 KB]
+Creating vector for RHS... [dist=2, compact] [0.1 KB]
+Allocating iteration vectors... [2 x 0.1 KB]
+TOTAL: [3.1 KB]
+
+Starting iterations...
+
+Jacobi: 15 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Value in the initial state: 12.983577861019423
+
+Time for model checking: 0.001 seconds.
+
+Result: 12.983577861019423 (exact floating point)
+

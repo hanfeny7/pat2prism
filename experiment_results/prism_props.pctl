@@ -1,0 +1,44 @@
+// PCTL properties for CoAP-EAP vs LO-CoAP-EAP comparative analysis
+// MDP-compatible properties (use Pmin/Pmax for nondeterministic models)
+
+// ==== Probability Metrics ====
+
+// Authentication Success Probability
+Pmin=? [ F "auth_success" ]
+Pmax=? [ F "auth_success" ]
+
+// Attack Success Rate
+Pmin=? [ F "attack_success" ]
+Pmax=? [ F "attack_success" ]
+
+// Message Loss Probability  
+Pmin=? [ F "message_loss_detected" ]
+Pmax=? [ F "message_loss_detected" ]
+
+// Corruption Detected Probability
+Pmin=? [ F "corruption_detected" ]
+Pmax=? [ F "corruption_detected" ]
+
+// Replay Vulnerability (LO-CoAP-EAP specific)
+Pmin=? [ F "replay_vulnerable" ]
+Pmax=? [ F "replay_vulnerable" ]
+
+// ==== Reward Metrics (Expected Values) ====
+
+// Expected bytes transmitted until authentication success
+R{"bytes"}min=? [ F "auth_success" ]
+R{"bytes"}max=? [ F "auth_success" ]
+
+// Expected number of messages until authentication success
+R{"messages"}min=? [ F "auth_success" ]
+R{"messages"}max=? [ F "auth_success" ]
+
+// ==== Time-Bounded Properties ====
+
+// Probability of successful auth within 50 steps (bounded time)
+Pmin=? [ F<=50 "auth_success" ]
+Pmax=? [ F<=50 "auth_success" ]
+
+// Probability of attack success within 30 steps
+Pmin=? [ F<=30 "attack_success" ]
+Pmax=? [ F<=30 "attack_success" ]

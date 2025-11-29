@@ -1,0 +1,25 @@
+// PCTL properties for CoAP-EAP vs LO-CoAP-EAP comparative analysis
+
+// Authentication Success Probability
+Pmin=? [ F "auth_success" ]
+Pmax=? [ F "auth_success" ]
+
+// Attack Success Rate
+Pmin=? [ F "attack_success" ]
+Pmax=? [ F "attack_success" ]
+
+// Message Loss Probability
+Pmin=? [ F "message_loss" ]
+Pmax=? [ F "message_loss" ]
+
+// Replay Vulnerability
+Pmin=? [ F "replay_vulnerable" ]
+Pmax=? [ F "replay_vulnerable" ]
+
+// Expected bytes
+R{"bytes"}min=? [ F "auth_success" ]
+R{"bytes"}max=? [ F "auth_success" ]
+
+// Expected messages
+R{"messages"}min=? [ F "auth_success" ]
+R{"messages"}max=? [ F "auth_success" ]
