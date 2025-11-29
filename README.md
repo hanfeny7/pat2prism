@@ -5,12 +5,13 @@ PAT2PRISM is an engineerable and theory-backed converter that transforms high-le
 
 ## Table of Contents
 - Features
-- Architecture
 - Installation
 - Quick Start (CLI and Web UI)
 - Usage Examples
+- Architecture
 - Reproducibility and Experiments
-- Screenshots (placeholders)
+- Screenshots
+- Case study in paper
 - Contributing
 - License & Contact
 
@@ -20,6 +21,37 @@ PAT2PRISM is an engineerable and theory-backed converter that transforms high-le
 - **Automated IR and Template Pipeline**: A clean IR separates parsing from generation; Jinja2 templates render model code for PRISM, enabling auditors to inspect and adapt model generation rules.
 - **Web UI for Rapid Iteration**: A lightweight Flask web UI enables online editing, quick conversion, visualization of statistics, and one-click export of generated models.
 - **Message & Type Inference**: Automatic extraction of message encodings and heuristic type classification for nonces, IDs, booleans, and keys, reducing manual modeling errors.
+
+## Installation
+Prerequisites:
+- Python 3.8 or newer
+- Java (for PRISM) if you plan to run PRISM locally
+
+Install Python dependencies:
+```powershell
+python -m pip install -r requirements.txt
+```
+
+Optional: download PRISM (recommended version used in experiments: 4.9) and add it to your PATH.
+
+## Quick Start
+
+Command-line conversion (example):
+```powershell
+# Convert a PAT file to a PRISM model
+PYTHONPATH=pat2prism python -m src.pat2prism.cli -i examples/Lo_coap_eap.pat -o out/Lo_coap_eap.pm
+```
+
+Run the Web UI for interactive editing and conversion:
+```powershell
+cd webui
+python app.py
+# Visit http://localhost:5000
+```
+
+## Usage Examples
+- Examples are provided in `examples/`. Each example demonstrates how to map PAT constructs (prefixing, external/internal choice, parallel composition) to PRISM templates.
+- The generator defaults to `mdp` semantics to preserve nondeterminism; to emit a `dtmc` model, set the template option `opts.model_type='dtmc'` or post-process the generated file.
 
 ## Architecture 
 
@@ -58,7 +90,7 @@ IR captures:
 - Templates are parameterized to allow `mdp` vs `dtmc` output and to inject configurable attack/channel parameters.
 - Manual refinement is preserved where domain knowledge is essential (crypto semantics, attack models).
 
-###Testing Strategy
+### Testing Strategy
 
 Unit tests for AST→IR and IR→template stages; integration tests validate that generated PRISM files contain expected module counts and labels.
 
@@ -66,37 +98,6 @@ Unit tests for AST→IR and IR→template stages; integration tests validate tha
 
 - Add new AST node handlers in `pat_visitor.py` and map them to IR constructs.
 - Create or modify Jinja2 templates for alternative PRISM encodings (DTMC, CTMC, or POMDP).
-
-## Installation
-Prerequisites:
-- Python 3.8 or newer
-- Java (for PRISM) if you plan to run PRISM locally
-
-Install Python dependencies:
-```powershell
-python -m pip install -r requirements.txt
-```
-
-Optional: download PRISM (recommended version used in experiments: 4.9) and add it to your PATH.
-
-## Quick Start
-
-Command-line conversion (example):
-```powershell
-# Convert a PAT file to a PRISM model
-PYTHONPATH=pat2prism python -m src.pat2prism.cli -i examples/Lo_coap_eap.pat -o out/Lo_coap_eap.pm
-```
-
-Run the Web UI for interactive editing and conversion:
-```powershell
-cd webui
-python app.py
-# Visit http://localhost:5000
-```
-
-## Usage Examples
-- Examples are provided in `examples/`. Each example demonstrates how to map PAT constructs (prefixing, external/internal choice, parallel composition) to PRISM templates.
-- The generator defaults to `mdp` semantics to preserve nondeterminism; to emit a `dtmc` model, set the template option `opts.model_type='dtmc'` or post-process the generated file.
 
 ## Reproducibility and Experiments
 We provide a reproducible experiment pipeline used for the paper evaluation. Key artifacts are available under `paper/` and `experiment_results/`:
@@ -123,44 +124,6 @@ Automation note: `tools/` contains helper scripts for batch execution. If PRISM 
 
 - Example: generated PRISM model preview
    ![Model preview placeholder](docs/screenshots/model_preview.png)
-
-## Contributing
-- Fork the repository and open a pull request with a clear description of changes.
-- Follow the code style and include tests for generator rule changes. See `CONTRIBUTING.md` if provided.
-
-## License & Contact
-- This project is released under the MIT License — see `LICENSE`.
-- For questions regarding reproducibility or access to experimental artifacts, contact the authors via their institutional emails or open an issue on GitHub.
-
----
-Prepared for reproducible protocol verification and reviewer inspection. Replace the screenshot placeholders in `docs/screenshots/` with high-quality images before publishing on GitHub.
-
-## Additional Project Documents (English translations)
-
-Below are concise, reviewer-friendly summaries of three supporting documents we include in this repository. Full English translations are provided in the same folder and linked for convenience. Place these files at the repository root or keep them in `experiment_results/` — both are acceptable for submission.
-
-- Paper Writing Guide (summary): guidance on honest, CCF-quality presentation of pat2prism, focusing on accurate claims, recommended phrasing, evaluation checklist, and rebuttal strategies. Full translation: `experiment_results/PAPER_WRITING_GUIDE_EN.md`.
-
-- Architecture Overview (summary): a high-level architectural description of the PAT→PRISM pipeline (lexer/parser → AST → IR → template renderer → PRISM output), core data structures, design decisions, and testing strategy. Full translation: `experiment_results/ARCHITECTURE_EN.md`.
-
-- Complete Feature List: a concise inventory of implemented UI and conversion features. The original file `experiment_results/COMPLETE_FEATURES.md` is already in English and contains the exhaustive feature matrix and demo-readiness notes.
-
-These documents are intended for reviewers who want technical depth beyond the README: use the summaries here for quick inspection and open the linked full documents for exhaustive guidance.
-
-Direct links to supporting documents (English translations):
-
-- Paper writing guide (detailed advice for presentation and reviewer responses): `experiment_results/PAPER_WRITING_GUIDE_EN.md`
-- Architecture overview (detailed pipeline, data structures, testing strategy): `experiment_results/ARCHITECTURE_EN.md`
-- Complete features manifest (exhaustive feature list and demo notes): `experiment_results/COMPLETE_FEATURES.md`
-
-### Recommended GitHub publication steps
-
-1. Create a public GitHub repository and push the project root. Include `LICENSE` and list `experiment_results/` and `paper/` as key folders for reviewers.
-2. Add production screenshots to `docs/screenshots/` and replace the README placeholders.
-3. Keep the full supporting documents in `experiment_results/` for reproducibility; optionally mirror them under `docs/` for web rendering via GitHub Pages.
-
-If you want, I can generate a top-level `README.md` in the repository root that links to these experiment materials and the `paper/` directory for reviewer convenience.
-
 ## Case Study: CoAP-EAP vs. Lo-CoAP-EAP
 
 This section presents a case study from our paper demonstrating the PAT2PRISM tool's application in analyzing two protocol variants: CoAP-EAP and Lo-CoAP-EAP. These protocols model EAP authentication over CoAP, with Lo-CoAP-EAP incorporating additional low-power optimizations. The study evaluates security properties under adversarial conditions using probabilistic model checking.
@@ -218,3 +181,15 @@ The experimental results, detailed in [CoAP-EAP vs. Lo-CoAP-EAP Protocol Details
 - **Key Insights**: MDP semantics enable precise modeling of nondeterministic attacker choices, providing more convincing results for reviewer scrutiny than DTMC-only approaches.
 
 All raw PRISM outputs and derived result files (e.g., `paper/result_std.txt`, `paper/result_lo_*.txt`) are included for reproducibility. Reviewers can rerun experiments using the provided scripts and models.
+
+## Contributing
+- Fork the repository and open a pull request with a clear description of changes.
+- Follow the code style and include tests for generator rule changes. See `CONTRIBUTING.md` if provided.
+
+## License & Contact
+- This project is released under the MIT License — see `LICENSE`.
+- For questions regarding reproducibility or access to experimental artifacts, contact the authors via their institutional emails or open an issue on GitHub.
+
+
+
+
