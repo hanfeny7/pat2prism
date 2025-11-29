@@ -21,9 +21,9 @@ PAT2PRISM is an engineerable and theory-backed converter that transforms high-le
 - **Web UI for Rapid Iteration**: A lightweight Flask web UI enables online editing, quick conversion, visualization of statistics, and one-click export of generated models.
 - **Message & Type Inference**: Automatic extraction of message encodings and heuristic type classification for nonces, IDs, booleans, and keys, reducing manual modeling errors.
 
-## Architecture (high-level)
+## Architecture 
 
-## System Overview
+** System Overview
 
 The conversion pipeline follows these stages:
 
@@ -36,7 +36,7 @@ The conversion pipeline follows these stages:
 Input: PAT specification (*.pat)
 Output: PRISM model file (*.prism) — default semantics: MDP
 
-## Core Components
+** Core Components
 
 - `src/pat2prism/pat_visitor.py` — AST visitor and IR builder
 - `src/pat2prism/ir.py` — IR definitions (Spec, ProcessModule, Transition)
@@ -45,24 +45,24 @@ Output: PRISM model file (*.prism) — default semantics: MDP
 - `webui/` — Flask-based interactive frontend
 - `tools/` — Batch scripts for experiments and example conversions
 
-## Data Model
+** Data Model
 
 IR captures:
 - Processes as modules (states, transitions)
 - Channels as global variables with integer-encoded messages
 - Guards and updates as literal expressions to be refined manually when needed
 
-## Design Rationale
+** Design Rationale
 
 - Separation of concerns enables auditable, testable transformation steps.
 - Templates are parameterized to allow `mdp` vs `dtmc` output and to inject configurable attack/channel parameters.
 - Manual refinement is preserved where domain knowledge is essential (crypto semantics, attack models).
 
-## Testing Strategy
+** Testing Strategy
 
 Unit tests for AST→IR and IR→template stages; integration tests validate that generated PRISM files contain expected module counts and labels.
 
-## How to Extend
+** How to Extend
 
 - Add new AST node handlers in `pat_visitor.py` and map them to IR constructs.
 - Create or modify Jinja2 templates for alternative PRISM encodings (DTMC, CTMC, or POMDP).
@@ -116,19 +116,13 @@ prism paper/lo_coap_eap_v0_02.pm paper/prism_props_mdp.pctl > paper/result_lo_v0
 
 Automation note: `tools/` contains helper scripts for batch execution. If PRISM is not available locally, consider using the provided Docker/CI configuration to run experiments reproducibly.
 
-## Screenshots and Figures (placeholders)
-Replace the placeholder images below with your actual screenshots. Recommended sizes are 800×600 px for UI images and 1200×800 px for architecture diagrams.
-
-- Architecture diagram
-   ![Architecture placeholder](docs/screenshots/architecture.png)
+## Screenshots and Figures
 
 - Web UI: model editor and statistics
    ![Web UI placeholder](docs/screenshots/webui_editor.png)
 
 - Example: generated PRISM model preview
    ![Model preview placeholder](docs/screenshots/model_preview.png)
-
-Screenshots and figures are provided in `docs/screenshots/` (files: `architecture.png`, `webui_editor.png`, `model_preview.png`).
 
 ## Contributing
 - Fork the repository and open a pull request with a clear description of changes.
