@@ -131,7 +131,7 @@ This section presents a case study from our paper demonstrating the PAT2PRISM to
 
 ### Protocol Overview
 Detailed protocol specifications, message flows, and state machines are shown in the figure:
-![Model placeholder](experiment_results/coap-eap_lo-coap-eap.png)
+![Model placeholder](experiment_results/docs/screenshots/coap-eap_lo-coap-eap.png)
 This figure includes:
 - High-level protocol descriptions for both variants.
 - Message sequence diagrams.
