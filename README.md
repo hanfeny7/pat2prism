@@ -120,10 +120,10 @@ Automation note: `tools/` contains helper scripts for batch execution. If PRISM 
 ## Screenshots and Figures
 
 - Web UI: model editor and statistics
-   ![Web UI placeholder](docs/screenshots/webui_editor.png)
+   ![Web UI placeholder](experiment_results/docs/screenshots/webui_editor.png)
 
 - Example: generated PRISM model preview
-   ![Model preview placeholder](docs/screenshots/model_preview.png)
+   ![Model preview placeholder](experiment_results/docs/screenshots/model_preview.png)
 ## Case Study: CoAP-EAP vs. Lo-CoAP-EAP
 
 This section presents a case study from our paper demonstrating the PAT2PRISM tool's application in analyzing two protocol variants: CoAP-EAP and Lo-CoAP-EAP. These protocols model EAP authentication over CoAP, with Lo-CoAP-EAP incorporating additional low-power optimizations. The study evaluates security properties under adversarial conditions using probabilistic model checking.
